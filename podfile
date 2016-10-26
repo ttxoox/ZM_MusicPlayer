@@ -1,0 +1,7 @@
+platform:'ios','7.0'
+target 'ZM_MusicPlayer' do
+pod 'MJExtension'
+pod 'AFNetworking'
+pod 'MJRefresh'
+pod 'SDWebImage'
+end

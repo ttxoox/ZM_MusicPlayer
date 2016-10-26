@@ -1,0 +1,47 @@
+//
+//  ZM_NavigationController.m
+//  ZM_MusicPlayer
+//
+//  Created by GVS on 16/10/21.
+//  Copyright © 2016年 GVS. All rights reserved.
+//
+
+#import "ZM_NavigationController.h"
+
+@interface ZM_NavigationController ()
+
+@end
+
+@implementation ZM_NavigationController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.viewControllers.count > 0) {
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    }
+    [super pushViewController:viewController animated:animated];
+}
+-(void)back
+{
+    [self popViewControllerAnimated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
