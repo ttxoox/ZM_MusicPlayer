@@ -48,7 +48,7 @@
     //接收通知，该通知由ZM_MusicManager发送,当前歌曲播放完毕，进行下一首播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBtnHandle:) name:@"PLAYEND" object:nil];
     [self startPlayMusic];
-    
+    //603.51
 }
 -(void)setup
 {
