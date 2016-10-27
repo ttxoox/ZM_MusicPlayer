@@ -17,4 +17,6 @@
 
 @property(nonatomic, strong)NSMutableArray<ZM_MusicModel *> * musicArray;//播放列表
 @property(nonatomic, assign)NSInteger playItem;//数组下标
+
++(ZM_PlayViewController *)sharedPlayVC;
 @end

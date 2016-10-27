@@ -58,6 +58,7 @@
     [ZM_MusicManager shareMusicManager].playList = self.dataArray;
     [ZM_MusicManager shareMusicManager].index = indexPath.row;
     ZM_PlayViewController * pvc = [[ZM_PlayViewController alloc] initWithNibName:@"ZM_PlayViewController" bundle:nil];
+    //ZM_PlayViewController * pvc = [ZM_PlayViewController sharedPlayVC];
     pvc.musicArray = self.dataArray;
     pvc.playItem = indexPath.row;
     [self presentViewController:pvc animated:YES completion:nil];

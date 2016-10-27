@@ -17,12 +17,23 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
 @end
+static ZM_PlayViewController * playVC;
 
 @implementation ZM_PlayViewController
 {
     NSTimer * _timer;
     NSArray * _array;
 }
++(ZM_PlayViewController *)sharedPlayVC
+{
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        playVC = [[ZM_PlayViewController alloc] init];
+    });
+    return playVC;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -44,9 +55,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self setup];
     //接收通知，该通知由ZM_MusicManager发送,当前歌曲播放完毕，进行下一首播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBtnHandle:) name:@"PLAYEND" object:nil];
+    
+    //接收通知，该通知由ZM_NavigationController发送，更改当前页面的参数
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:@"TOPLAYPAGE" object:nil];
     [self startPlayMusic];
     //603.51
 }
@@ -72,12 +87,19 @@
     }
     self.playBtn.selected = YES;
     if ([[self.musicArray[_playItem] url] length] == 0) {
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"应版权方要求，该歌曲暂时不能播放，将自动切换下一首歌曲。" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"应版权方要求，该歌曲暂时不能播放，已自动切换到下一首歌曲。" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+         
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:^{
             [self nextBtnHandle:self.nextBtn];
         }];
-        [alertController addAction:action];
-        [self presentViewController:alertController animated:YES completion:nil];
+        
+        //plist文件:瓦解音乐源:255319.mp3
+       // [self nextBtnHandle:self.nextBtn];
     }
 }
 -(void)startPlayMusic
@@ -108,6 +130,7 @@
     }
 }
 - (IBAction)nextBtnHandle:(UIButton *)sender {
+    NSLog(@"%@",self.url);
     self.playItem++;
     if (self.playItem > self.musicArray.count - 1) {
         self.playItem = 0;

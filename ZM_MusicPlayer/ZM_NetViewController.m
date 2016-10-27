@@ -36,12 +36,13 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor whiteColor];
-    UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 50)];
+    [self.view addSubview:_tableView];
+    UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(60, 20, KWIDTH-100, 44.0f)];
     searchBar.delegate = self;
     searchBar.placeholder = @"查找歌手或歌曲";
     searchBar.showsCancelButton = YES;
-    self.tableView.tableHeaderView = searchBar;
-    [self.view addSubview:_tableView];
+    self.navigationItem.titleView = searchBar;
+    
 }
 #pragma mark - 请求数据
 -(void)loadDataSource
@@ -111,12 +112,12 @@
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    ZM_SearchViewController * svc = [[ZM_SearchViewController alloc] init];
+    ZM_NavigationController * nav = [[ZM_NavigationController alloc] initWithRootViewController:svc];
+    svc.searchText = searchBar.text;
+    [self presentViewController:nav animated:YES completion:nil];
     searchBar.text = nil;
     [searchBar resignFirstResponder];
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"该功能暂未实现" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:action];
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

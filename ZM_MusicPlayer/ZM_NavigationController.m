@@ -7,7 +7,8 @@
 //
 
 #import "ZM_NavigationController.h"
-
+#import "ZM_PlayViewController.h"
+#import "ZM_NetViewController.h"
 @interface ZM_NavigationController ()
 
 @end
@@ -23,11 +24,25 @@
     if (self.viewControllers.count > 0) {
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     }
+    if (![viewController.class isSubclassOfClass:[ZM_NetViewController class]]) {
+        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"playing"] style:UIBarButtonItemStylePlain target:self action:@selector(toPlayPage)];
+    }
+    
     [super pushViewController:viewController animated:animated];
 }
 -(void)back
 {
     [self popViewControllerAnimated:YES];
+}
+-(void)toPlayPage
+{
+    
+    /*
+    [self presentViewController:[ZM_PlayViewController sharedPlayVC] animated:YES completion:^{
+        NSNotification * notification = [NSNotification notificationWithName:@"TOPLAYPAGE" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }];
+     */
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

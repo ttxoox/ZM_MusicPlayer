@@ -56,7 +56,7 @@ static AVAudioSession * session;
         NSLog(@"data初始化方式出现错误，错误详情:%@,进入URL初始化！",error);
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
     }
-     self.audioPlayer.delegate = self;
+    self.audioPlayer.delegate = self;
     if ([self.audioPlayer prepareToPlay]) {
         [self.audioPlayer play];
     }

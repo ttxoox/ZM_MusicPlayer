@@ -4,17 +4,17 @@
 <array>
 	<dict>
 		<key>album</key>
-		<string>南拳妈妈的夏天</string>
+		<string>手写青春</string>
 		<key>title</key>
-		<string>瓦解</string>
+		<string>一次就好</string>
 		<key>url</key>
-		<string>255319.mp3</string>
+		<string>一次就好.mp3</string>
 		<key>singer</key>
-		<string>南拳妈妈</string>
+		<string>杨宗纬</string>
 		<key>singerIcon</key>
-		<string>nanquan_icon.jpg</string>
+		<string>yzw_icon</string>
 		<key>singerImg</key>
-		<string>nanquan.jpg</string>
+		<string>yzw.jpg</string>
 	</dict>
 	<dict>
 		<key>album</key>
@@ -32,6 +32,20 @@
 	</dict>
 	<dict>
 		<key>album</key>
+		<string>南拳妈妈的夏天</string>
+		<key>title</key>
+		<string>瓦解</string>
+		<key>url</key>
+		<string></string>
+		<key>singer</key>
+		<string>南拳妈妈</string>
+		<key>singerIcon</key>
+		<string>nanquan_icon.jpg</string>
+		<key>singerImg</key>
+		<string>nanquan.jpg</string>
+	</dict>
+	<dict>
+		<key>album</key>
 		<string>编号89757</string>
 		<key>title</key>
 		<string>一千年以后</string>
@@ -43,20 +57,6 @@
 		<string>jj_icon.png</string>
 		<key>singerImg</key>
 		<string>jj.jpg</string>
-	</dict>
-	<dict>
-		<key>album</key>
-		<string>手写青春</string>
-		<key>title</key>
-		<string>一次就好</string>
-		<key>url</key>
-		<string>一次就好.mp3</string>
-		<key>singer</key>
-		<string>杨宗纬</string>
-		<key>singerIcon</key>
-		<string>yzw_icon</string>
-		<key>singerImg</key>
-		<string>yzw.jpg</string>
 	</dict>
 	<dict>
 		<key>album</key>

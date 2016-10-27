@@ -55,6 +55,7 @@
 		ECA3F8321DBDE57D001CD03D /* ZM_SingerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8311DBDE57D001CD03D /* ZM_SingerListViewController.m */; };
 		ECA3F8351DBDF2CC001CD03D /* ZM_SingerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8341DBDF2CC001CD03D /* ZM_SingerListModel.m */; };
 		ECA3F8381DBDFD43001CD03D /* ZM_SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */; };
+		ECB8AFFD1DC1B08E00181304 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB8AFFC1DC1B08E00181304 /* playing.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		ECA3F8341DBDF2CC001CD03D /* ZM_SingerListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_SingerListModel.m; sourceTree = "<group>"; };
 		ECA3F8361DBDFD43001CD03D /* ZM_SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_SongViewController.h; sourceTree = "<group>"; };
 		ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_SongViewController.m; sourceTree = "<group>"; };
+		ECB8AFFC1DC1B08E00181304 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +365,7 @@
 		EC8C4B141DB9C79E00A421AC /* image */ = {
 			isa = PBXGroup;
 			children = (
+				ECB8AFFC1DC1B08E00181304 /* playing.png */,
 				ECA3F8241DBD9DCD001CD03D /* quit@2x.png */,
 				ECA3F81C1DBD9DA8001CD03D /* previous@2x.png */,
 				ECA3F81D1DBD9DA8001CD03D /* play@2x.png */,
@@ -604,6 +607,7 @@
 				EC244F441DB9F97D00675C92 /* nanquan_icon@2x.jpg in Resources */,
 				EC244F431DB9F97D00675C92 /* nanquan@2x.jpg in Resources */,
 				EC8C4B241DB9EBE500A421AC /* Musics.plist in Resources */,
+				ECB8AFFD1DC1B08E00181304 /* playing.png in Resources */,
 				EC244F4A1DB9F9BE00675C92 /* yzw.jpg in Resources */,
 				EC8C4AE11DB9C6E000A421AC /* Main.storyboard in Resources */,
 				ECA3F8221DBD9DA8001CD03D /* pause@2x.png in Resources */,
