@@ -21,7 +21,6 @@ static AVAudioSession * session;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
-        session = [AVAudioSession sharedInstance];
     });
     return instance;
 }
@@ -30,10 +29,11 @@ static AVAudioSession * session;
 {
     self = [super init];
     if (self) {
+        session = [AVAudioSession sharedInstance];
         //激活会话对象
         [session setActive:YES error:nil];
         //设置后台播放
-        [session setMode:AVAudioSessionCategoryPlayback error:nil];
+        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         _playList = [[NSMutableArray alloc] init];
     }
     return self;

@@ -4,7 +4,7 @@
 <dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>允许后台播放</string>
+		<string>audio</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
