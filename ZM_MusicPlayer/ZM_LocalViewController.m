@@ -29,14 +29,26 @@
     }
     return _dataArray;
 }
-
+-(void)checkList
+{
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * doc = [paths objectAtIndex:0];
+    NSArray * listArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:doc error:nil];
+    NSMutableArray * fileArray = [NSMutableArray array];
+    for (NSString * str in listArray) {
+        if ([[[str componentsSeparatedByString:@"."] lastObject] isEqualToString:@"mp3"]) {
+            [fileArray addObject:str];
+        }
+    }
+     
+}
 -(void)setup
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-    
+    //[self checkList];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

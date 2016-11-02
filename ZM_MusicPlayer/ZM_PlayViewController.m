@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UILabel *cureenTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
-
+@property (nonatomic, assign)BOOL fileIsExist;
 @end
 static ZM_PlayViewController * playVC;
 
@@ -39,6 +39,11 @@ static ZM_PlayViewController * playVC;
     [super viewWillAppear:animated];
     [_timer setFireDate:[NSDate distantPast]];
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //[self startPlayMusic];
+}
 -(NSMutableArray *)musicArray
 {
     if (!_musicArray) {
@@ -56,14 +61,15 @@ static ZM_PlayViewController * playVC;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setup];
+    
     //接收通知，该通知由ZM_MusicManager发送,当前歌曲播放完毕，进行下一首播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBtnHandle:) name:@"PLAYEND" object:nil];
     
     //接收通知，该通知由ZM_NavigationController发送，更改当前页面的参数
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:@"TOPLAYPAGE" object:nil];
+    [self setup];
     [self startPlayMusic];
-    //603.51
+    
 }
 -(void)setup
 {
@@ -101,18 +107,20 @@ static ZM_PlayViewController * playVC;
         //plist文件:瓦解音乐源:255319.mp3
        // [self nextBtnHandle:self.nextBtn];
     }
+    
 }
 -(void)startPlayMusic
 {
-    [[ZM_MusicManager shareMusicManager] playMusicWithURL:self.url andIndex:_playItem];
     _timer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(sliderHandle:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    [[ZM_MusicManager shareMusicManager] playMusicWithURL:self.url andIndex:_playItem];
 }
 - (IBAction)quitBtnHandle:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)previousBtnHandle:(UIButton *)sender {
     self.playItem--;
+    [[ZM_MusicManager shareMusicManager] stopPlayingMusic];
     if (self.playItem < 0) {
         self.playItem = self.musicArray.count - 1;
     }
@@ -130,8 +138,8 @@ static ZM_PlayViewController * playVC;
     }
 }
 - (IBAction)nextBtnHandle:(UIButton *)sender {
-    NSLog(@"%@",self.url);
     self.playItem++;
+    [[ZM_MusicManager shareMusicManager] stopPlayingMusic];
     if (self.playItem > self.musicArray.count - 1) {
         self.playItem = 0;
     }
@@ -153,7 +161,35 @@ static ZM_PlayViewController * playVC;
     self.slider.value = currentM * 60 + currentS;
     
 }
-
+- (IBAction)downloadHandle:(UIButton *)sender {
+    if (![self checkFileExist]) {
+        [[ZM_MusicManager shareMusicManager] downloadMusicWithUrl:[NSString stringWithFormat:@"%@",self.url] andFileName:[self.musicArray[_playItem] title]];
+    }
+}
+-(BOOL)checkFileExist
+{
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * doc = [paths objectAtIndex:0];
+    NSArray * listArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:doc error:nil];
+    NSMutableArray * fileArray = [NSMutableArray array];
+    for (NSString * str in listArray) {
+        if ([[[str componentsSeparatedByString:@"."] lastObject] isEqualToString:@"mp3"]) {
+            [fileArray addObject:str];
+        }
+    }
+    for (NSString * name in fileArray) {
+        if ([[[name componentsSeparatedByString:@"."] firstObject] isEqualToString:[self.musicArray[_playItem] title]]) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"歌曲已存在" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:action];
+            [self presentViewController:alertController animated:YES completion:nil];
+            self.fileIsExist = YES;
+        }else{
+            self.fileIsExist = NO;
+        }
+    }
+    return self.fileIsExist;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

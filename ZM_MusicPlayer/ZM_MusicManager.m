@@ -47,19 +47,26 @@ static AVAudioSession * session;
  */
 -(void)playMusicWithURL:(NSURL *)playURL andIndex:(NSInteger)index
 {
-    NSError * error;
-    NSData * data = [NSData dataWithContentsOfURL:playURL];
-    //此处建议使用initWithData方法，不建议下面的initWithContentsOfURL方法
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
-    //self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    if(error){
-        NSLog(@"data初始化方式出现错误，错误详情:%@,进入URL初始化！",error);
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
-    }
-    self.audioPlayer.delegate = self;
-    if ([self.audioPlayer prepareToPlay]) {
-        [self.audioPlayer play];
-    }
+    //NSData * musicData = [[NSData alloc] init];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData * data = [NSData dataWithContentsOfURL:playURL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSError * error;
+            //此处建议使用initWithData方法，不建议下面的initWithContentsOfURL方法
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&error];
+            //self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            if(error){
+                NSLog(@"data初始化方式出现错误，错误详情:%@,进入URL初始化！",error);
+                self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
+            }
+            self.audioPlayer.delegate = self;
+            if ([self.audioPlayer prepareToPlay]) {
+                [self.audioPlayer play];
+            }
+
+        });
+    });
+    
 }
 
 /**
@@ -135,6 +142,17 @@ static AVAudioSession * session;
     }
     [self playMusicWithURL:nextURL andIndex:_index];
 
+}
+
+-(void)downloadMusicWithUrl:(NSString *)url andFileName:(NSString *)filename
+{
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    NSMutableData * mp3Data = [NSMutableData data];
+    [mp3Data appendData:data];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * doc = [paths objectAtIndex:0];
+    NSString * path = [doc stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3",filename]];
+    [mp3Data writeToFile:path atomically:YES];
 }
 #pragma mark -AVAudioPlayerDelegate
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag

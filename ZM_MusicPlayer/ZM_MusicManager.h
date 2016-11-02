@@ -77,4 +77,7 @@
  上一首
  */
 -(void)previousMusic;
+
+//下载歌曲
+-(void)downloadMusicWithUrl:(NSString *)url andFileName:(NSString *)filename;
 @end

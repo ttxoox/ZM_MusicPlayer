@@ -36,13 +36,13 @@
 }
 -(void)toPlayPage
 {
-    
-    /*
+#if 0
     [self presentViewController:[ZM_PlayViewController sharedPlayVC] animated:YES completion:^{
         NSNotification * notification = [NSNotification notificationWithName:@"TOPLAYPAGE" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     }];
-     */
+#endif
+     
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
