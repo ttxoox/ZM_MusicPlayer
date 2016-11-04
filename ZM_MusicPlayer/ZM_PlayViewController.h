@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZM_MusicModel.h"
 
+#import "ZM_MusicModel.h"
 @interface ZM_PlayViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *backImgView;
 @property (weak, nonatomic) IBOutlet UILabel *musicName;

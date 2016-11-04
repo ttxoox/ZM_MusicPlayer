@@ -42,6 +42,7 @@
     }
      
 }
+
 -(void)setup
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT) style:UITableViewStylePlain];

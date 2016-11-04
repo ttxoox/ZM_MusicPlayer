@@ -8,6 +8,9 @@
 
 #import "ZM_PlayViewController.h"
 #import "Header.h"
+//#include <Platinum/Platinum.h>
+#include <Platinum/PltCtrlPoint.h>
+#include <Neptune/Neptune.h>
 @interface ZM_PlayViewController ()
 @property (nonatomic, strong)NSURL * url;
 @property (weak, nonatomic) IBOutlet UIButton *previousBtn;
@@ -16,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *cureenTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 @property (nonatomic, assign)BOOL fileIsExist;
+
+@property (nonatomic, strong)UITableView * tableView;//展示搜索到的UPnP设备
+@property (nonatomic, strong)NSMutableArray * dataArray;//设备数组
 @end
 static ZM_PlayViewController * playVC;
 
@@ -24,6 +30,7 @@ static ZM_PlayViewController * playVC;
     NSTimer * _timer;
     NSArray * _array;
 }
+
 +(ZM_PlayViewController *)sharedPlayVC
 {
     
@@ -32,8 +39,15 @@ static ZM_PlayViewController * playVC;
         playVC = [[ZM_PlayViewController alloc] init];
     });
     return playVC;
+    
 }
-
+-(NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -51,6 +65,7 @@ static ZM_PlayViewController * playVC;
     }
     return _musicArray;
 }
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -60,7 +75,6 @@ static ZM_PlayViewController * playVC;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     
     //接收通知，该通知由ZM_MusicManager发送,当前歌曲播放完毕，进行下一首播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBtnHandle:) name:@"PLAYEND" object:nil];
@@ -190,6 +204,55 @@ static ZM_PlayViewController * playVC;
     }
     return self.fileIsExist;
 }
+
+- (IBAction)dlnaHanle:(UIButton *)sender {
+/*
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 500, KWIDTH, 75) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor whiteColor];
+    [self.view bringSubviewToFront:self.tableView];
+    [self.view addSubview:_tableView];
+ */
+#if 0
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择设备" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"设备1" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"设备2" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:action1];
+    [alertController addAction:action2];
+    [alertController addAction:action3];
+    [self presentViewController:alertController animated:YES completion:nil];
+#endif
+
+    ZM_DLNAViewController * dlna = [[ZM_DLNAViewController alloc] init];
+    [self presentViewController:dlna animated:YES completion:nil];
+}
+
+#if 0
+#pragma mark - UPnP TableView delegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+    //return self.dataArray.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = @"test";
+    cell.textLabel.textColor = [UIColor blackColor];
+    return cell;
+}
+#endif
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -5,6 +5,14 @@
 //  Created by GVS on 16/10/21.
 //  Copyright © 2016年 GVS. All rights reserved.
 //
+/*
+#ifdef _OBJC_GC_
+#import "Platinum/Platinum.h"
+#import "Neptune/Neptune.h"
+#endif
+*/
+
+
 
 #ifndef Header_h
 #define Header_h
@@ -28,6 +36,8 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
+//#import <Platinum/Platinum.h>
+
 
 #import "ZM_TabBarController.h"
 #import "ZM_NavigationController.h"
@@ -37,6 +47,7 @@
 #import "ZM_SingerListViewController.h"
 #import "ZM_SongViewController.h"
 #import "ZM_SearchViewController.h"
+#import "ZM_DLNAViewController.h"
 
 #import "ZM_MusicModel.h"
 #import "ZM_CategoryModel.h"

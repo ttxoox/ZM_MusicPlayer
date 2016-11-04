@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,15 +30,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vE3-ZA-zb7" userLabel="上层view">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="560"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_play_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IOH-HF-dIl" userLabel="背景图"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_play_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="IOH-HF-dIl" userLabel="背景图">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e70-bW-LP4" userLabel="退出按钮">
+                            <rect key="frame" x="10" y="15" width="41" height="48"/>
                             <state key="normal" backgroundImage="quit.png"/>
                             <connections>
                                 <action selector="quitBtnHandle:" destination="-1" eventType="touchUpInside" id="b8h-gc-opw"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNE-KH-cDB" userLabel="歌名">
+                            <rect key="frame" x="0.0" y="500" width="375" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="aUS-1B-4Cv"/>
                             </constraints>
@@ -44,6 +52,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-rr-bK6" userLabel="歌手">
+                            <rect key="frame" x="0.0" y="530" width="375" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="QRc-On-cpJ"/>
                             </constraints>
@@ -69,13 +78,16 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIT-jk-TSz" userLabel="中间view">
+                    <rect key="frame" x="0.0" y="560" width="375" height="30"/>
                     <subviews>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="suh-S5-O2B" userLabel="进度条">
+                            <rect key="frame" x="40" y="0.0" width="295" height="31"/>
                             <connections>
                                 <action selector="sliderHandle:" destination="-1" eventType="valueChanged" id="de0-QB-Oih"/>
                             </connections>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW3-yk-WJF">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="aRM-ye-Fc2"/>
                             </constraints>
@@ -84,6 +96,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUF-8i-dTG">
+                            <rect key="frame" x="335" y="0.0" width="40" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -105,27 +118,31 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2M-HM-e9t" userLabel="下层view">
+                    <rect key="frame" x="0.0" y="590" width="375" height="77"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxi-tE-6hH" userLabel="上一首">
+                            <rect key="frame" x="50" y="10" width="41" height="46"/>
                             <state key="normal" backgroundImage="previous.png"/>
                             <connections>
                                 <action selector="previousBtnHandle:" destination="-1" eventType="touchUpInside" id="OI3-cB-e40"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H17-WE-sI8" userLabel="播放">
+                            <rect key="frame" x="141" y="10" width="72" height="46"/>
                             <state key="normal" backgroundImage="pause.png"/>
                             <connections>
                                 <action selector="playBtnHandle:" destination="-1" eventType="touchUpInside" id="Ae0-M7-zUc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7W-gu-aTq" userLabel="下一首">
+                            <rect key="frame" x="263" y="10" width="41" height="46"/>
                             <state key="normal" backgroundImage="next.png"/>
                             <connections>
                                 <action selector="nextBtnHandle:" destination="-1" eventType="touchUpInside" id="aaX-Gs-5W9"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="df3-Ld-zco">
-                            <frame key="frameInset" minX="312" minY="39" width="46" height="30"/>
+                            <rect key="frame" x="312" y="39" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="下载">
@@ -133,6 +150,17 @@
                             </state>
                             <connections>
                                 <action selector="downloadHandle:" destination="-1" eventType="touchUpInside" id="pox-QR-FxO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUX-3k-fUb">
+                            <rect key="frame" x="8" y="39" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="DLNA">
+                                <color key="titleColor" red="0.6810385377702588" green="0.52941695254426135" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="dlnaHanle:" destination="-1" eventType="touchUpInside" id="4A4-yo-Foj"/>
                             </connections>
                         </button>
                     </subviews>

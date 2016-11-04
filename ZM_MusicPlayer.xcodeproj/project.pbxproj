@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		9DF3AB412F119357708D0A2B /* libPods-ZM_MusicPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1861F8AF78BFF8BFB72427E /* libPods-ZM_MusicPlayer.a */; };
+		EC01DDF51DCC15BA00ADA47B /* ZM_DLNAViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC01DDF31DCC15BA00ADA47B /* ZM_DLNAViewController.h */; };
+		EC01DDF61DCC15BA00ADA47B /* ZM_DLNAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC01DDF41DCC15BA00ADA47B /* ZM_DLNAViewController.m */; };
+		EC108DDE1DCB3AE3006D542A /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD010D31DCACE6B001DF8FC /* Neptune.framework */; };
+		EC108DDF1DCB3AE3006D542A /* Neptune.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ECD010D31DCACE6B001DF8FC /* Neptune.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EC108DE11DCB3AFA006D542A /* Platinum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC108DE01DCB3AF9006D542A /* Platinum.framework */; };
+		EC108DE21DCB3AFA006D542A /* Platinum.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC108DE01DCB3AF9006D542A /* Platinum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EC108DE41DCB3B7C006D542A /* Platinum.framework in Headers */ = {isa = PBXBuildFile; fileRef = EC108DE01DCB3AF9006D542A /* Platinum.framework */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC108DE51DCB3B94006D542A /* Neptune.framework in Headers */ = {isa = PBXBuildFile; fileRef = ECD010D31DCACE6B001DF8FC /* Neptune.framework */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC108DE61DCB3BCD006D542A /* Platinum.framework in Sources */ = {isa = PBXBuildFile; fileRef = EC108DE01DCB3AF9006D542A /* Platinum.framework */; };
+		EC108DE71DCB3BD2006D542A /* Neptune.framework in Sources */ = {isa = PBXBuildFile; fileRef = ECD010D31DCACE6B001DF8FC /* Neptune.framework */; };
 		EC1797DE1DC09EAF00E4D7E8 /* ZM_SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1797DD1DC09EAF00E4D7E8 /* ZM_SearchViewController.m */; };
 		EC244F411DB9F97D00675C92 /* jj@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC244F3B1DB9F97D00675C92 /* jj@2x.jpg */; };
 		EC244F421DB9F97D00675C92 /* jj_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC244F3C1DB9F97D00675C92 /* jj_icon@2x.png */; };
@@ -42,9 +52,7 @@
 		EC8C4B421DB9EC8200A421AC /* 235319.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4B3D1DB9EC8200A421AC /* 235319.mp3 */; };
 		EC8C4B431DB9EC8200A421AC /* 255319.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4B3E1DB9EC8200A421AC /* 255319.mp3 */; };
 		EC8C4B441DB9EC8200A421AC /* 309769.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EC8C4B3F1DB9EC8200A421AC /* 309769.mp3 */; };
-		EC9AF5A61DC9F00700F4E683 /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9AF5A51DC9F00700F4E683 /* Neptune.framework */; };
-		EC9AF5A71DC9F00700F4E683 /* Neptune.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC9AF5A51DC9F00700F4E683 /* Neptune.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ECA3F8181DBD9671001CD03D /* ZM_PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.m */; };
+		ECA3F8181DBD9671001CD03D /* ZM_PlayViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.mm */; };
 		ECA3F8191DBD9671001CD03D /* ZM_PlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA3F8171DBD9671001CD03D /* ZM_PlayViewController.xib */; };
 		ECA3F81B1DBD9BE0001CD03D /* default_play_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECA3F81A1DBD9BE0001CD03D /* default_play_bg.jpg */; };
 		ECA3F8201DBD9DA8001CD03D /* previous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECA3F81C1DBD9DA8001CD03D /* previous@2x.png */; };
@@ -58,8 +66,6 @@
 		ECA3F8351DBDF2CC001CD03D /* ZM_SingerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8341DBDF2CC001CD03D /* ZM_SingerListModel.m */; };
 		ECA3F8381DBDFD43001CD03D /* ZM_SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */; };
 		ECB8AFFD1DC1B08E00181304 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB8AFFC1DC1B08E00181304 /* playing.png */; };
-		ECE931E31DC9E20F009FD70E /* Platinum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE931E21DC9E20F009FD70E /* Platinum.framework */; };
-		ECE931E41DC9E20F009FD70E /* Platinum.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ECE931E21DC9E20F009FD70E /* Platinum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,14 +86,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		ECE931E51DC9E20F009FD70E /* Embed Frameworks */ = {
+		EC108DD91DCB21A6006D542A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EC9AF5A71DC9F00700F4E683 /* Neptune.framework in Embed Frameworks */,
-				ECE931E41DC9E20F009FD70E /* Platinum.framework in Embed Frameworks */,
+				EC108DE21DCB3AFA006D542A /* Platinum.framework in Embed Frameworks */,
+				EC108DDF1DCB3AE3006D542A /* Neptune.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +104,9 @@
 		37F495E8397A08C50F08EC4C /* Pods-ZM_MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZM_MusicPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZM_MusicPlayer/Pods-ZM_MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		48D31C5330F0A22B929DE291 /* Pods-ZM_MusicPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZM_MusicPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZM_MusicPlayer/Pods-ZM_MusicPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		A1861F8AF78BFF8BFB72427E /* libPods-ZM_MusicPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZM_MusicPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC01DDF31DCC15BA00ADA47B /* ZM_DLNAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_DLNAViewController.h; sourceTree = "<group>"; };
+		EC01DDF41DCC15BA00ADA47B /* ZM_DLNAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_DLNAViewController.m; sourceTree = "<group>"; };
+		EC108DE01DCB3AF9006D542A /* Platinum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Platinum.framework; path = Carthage/Build/iOS/Platinum.framework; sourceTree = "<group>"; };
 		EC1797DC1DC09EAF00E4D7E8 /* ZM_SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_SearchViewController.h; sourceTree = "<group>"; };
 		EC1797DD1DC09EAF00E4D7E8 /* ZM_SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_SearchViewController.m; sourceTree = "<group>"; };
 		EC244F3B1DB9F97D00675C92 /* jj@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jj@2x.jpg"; sourceTree = "<group>"; };
@@ -147,9 +156,8 @@
 		EC8C4B3D1DB9EC8200A421AC /* 235319.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 235319.mp3; sourceTree = "<group>"; };
 		EC8C4B3E1DB9EC8200A421AC /* 255319.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 255319.mp3; sourceTree = "<group>"; };
 		EC8C4B3F1DB9EC8200A421AC /* 309769.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 309769.mp3; sourceTree = "<group>"; };
-		EC9AF5A51DC9F00700F4E683 /* Neptune.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Neptune.framework; sourceTree = "<group>"; };
 		ECA3F8151DBD9671001CD03D /* ZM_PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_PlayViewController.h; sourceTree = "<group>"; };
-		ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_PlayViewController.m; sourceTree = "<group>"; };
+		ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZM_PlayViewController.mm; sourceTree = "<group>"; };
 		ECA3F8171DBD9671001CD03D /* ZM_PlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZM_PlayViewController.xib; sourceTree = "<group>"; };
 		ECA3F81A1DBD9BE0001CD03D /* default_play_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_play_bg.jpg; sourceTree = "<group>"; };
 		ECA3F81C1DBD9DA8001CD03D /* previous@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "previous@2x.png"; sourceTree = "<group>"; };
@@ -168,7 +176,7 @@
 		ECA3F8361DBDFD43001CD03D /* ZM_SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_SongViewController.h; sourceTree = "<group>"; };
 		ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_SongViewController.m; sourceTree = "<group>"; };
 		ECB8AFFC1DC1B08E00181304 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
-		ECE931E21DC9E20F009FD70E /* Platinum.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Platinum.framework; path = Carthage/Build/iOS/Platinum.framework; sourceTree = "<group>"; };
+		ECD010D31DCACE6B001DF8FC /* Neptune.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Neptune.framework; path = Carthage/Build/iOS/Neptune.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC9AF5A61DC9F00700F4E683 /* Neptune.framework in Frameworks */,
-				ECE931E31DC9E20F009FD70E /* Platinum.framework in Frameworks */,
+				EC108DDE1DCB3AE3006D542A /* Neptune.framework in Frameworks */,
+				EC108DE11DCB3AFA006D542A /* Platinum.framework in Frameworks */,
 				9DF3AB412F119357708D0A2B /* libPods-ZM_MusicPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,8 +247,10 @@
 			isa = PBXGroup;
 			children = (
 				ECA3F8151DBD9671001CD03D /* ZM_PlayViewController.h */,
-				ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.m */,
+				ECA3F8161DBD9671001CD03D /* ZM_PlayViewController.mm */,
 				ECA3F8171DBD9671001CD03D /* ZM_PlayViewController.xib */,
+				EC01DDF31DCC15BA00ADA47B /* ZM_DLNAViewController.h */,
+				EC01DDF41DCC15BA00ADA47B /* ZM_DLNAViewController.m */,
 			);
 			name = "播放页面";
 			sourceTree = "<group>";
@@ -273,8 +283,6 @@
 		EC8C4ACA1DB9C6E000A421AC = {
 			isa = PBXGroup;
 			children = (
-				EC9AF5A51DC9F00700F4E683 /* Neptune.framework */,
-				ECE931E21DC9E20F009FD70E /* Platinum.framework */,
 				EC8C4AD51DB9C6E000A421AC /* ZM_MusicPlayer */,
 				EC8C4AEF1DB9C6E100A421AC /* ZM_MusicPlayerTests */,
 				EC8C4AFA1DB9C6E100A421AC /* ZM_MusicPlayerUITests */,
@@ -490,12 +498,27 @@
 		ED63C4F950D880F5B04D4AC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC108DE01DCB3AF9006D542A /* Platinum.framework */,
+				ECD010D31DCACE6B001DF8FC /* Neptune.framework */,
 				A1861F8AF78BFF8BFB72427E /* libPods-ZM_MusicPlayer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EC108DE31DCB3B6A006D542A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC01DDF51DCC15BA00ADA47B /* ZM_DLNAViewController.h in Headers */,
+				EC108DE41DCB3B7C006D542A /* Platinum.framework in Headers */,
+				EC108DE51DCB3B94006D542A /* Neptune.framework in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		EC8C4AD21DB9C6E000A421AC /* ZM_MusicPlayer */ = {
@@ -508,7 +531,9 @@
 				EC8C4AD11DB9C6E000A421AC /* Resources */,
 				3545AC28CC5650C379E71D1B /* [CP] Embed Pods Frameworks */,
 				33A9951B586167B38817155E /* [CP] Copy Pods Resources */,
-				ECE931E51DC9E20F009FD70E /* Embed Frameworks */,
+				ECD010D11DCACC48001DF8FC /* Run Script */,
+				EC108DD91DCB21A6006D542A /* Embed Frameworks */,
+				EC108DE31DCB3B6A006D542A /* Headers */,
 			);
 			buildRules = (
 			);
@@ -687,6 +712,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZM_MusicPlayer/Pods-ZM_MusicPlayer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		ECD010D11DCACC48001DF8FC /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Neptune.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Platinum.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		F07AF42C75140C430D6388D4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +749,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC01DDF61DCC15BA00ADA47B /* ZM_DLNAViewController.m in Sources */,
+				EC108DE71DCB3BD2006D542A /* Neptune.framework in Sources */,
+				EC108DE61DCB3BCD006D542A /* Platinum.framework in Sources */,
 				ECA3F82F1DBDDEEE001CD03D /* ZM_CategoryModel.m in Sources */,
 				ECA3F8291DBDAD1E001CD03D /* ZM_MusicManager.m in Sources */,
 				EC8C4B131DB9C79000A421AC /* ZM_TabBarController.m in Sources */,
@@ -716,7 +760,7 @@
 				EC8C4ADE1DB9C6E000A421AC /* ZM_LocalViewController.m in Sources */,
 				EC8C4ADB1DB9C6E000A421AC /* AppDelegate.m in Sources */,
 				ECA3F8381DBDFD43001CD03D /* ZM_SongViewController.m in Sources */,
-				ECA3F8181DBD9671001CD03D /* ZM_PlayViewController.m in Sources */,
+				ECA3F8181DBD9671001CD03D /* ZM_PlayViewController.mm in Sources */,
 				EC244F4D1DB9FAED00675C92 /* ZM_MusicTVCell.m in Sources */,
 				EC8C4B101DB9C76100A421AC /* ZM_NavigationController.m in Sources */,
 				ECA3F8321DBDE57D001CD03D /* ZM_SingerListViewController.m in Sources */,
@@ -885,6 +929,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "GVS.ZM-MusicPlayer";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -906,6 +951,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "GVS.ZM-MusicPlayer";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
