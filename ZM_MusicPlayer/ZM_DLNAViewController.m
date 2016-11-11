@@ -10,11 +10,19 @@
 #import "Header.h"
 @interface ZM_DLNAViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView * tableView;
-@property (nonatomic, strong)NSMutableArray * dataArray;
+
+
+//@property (nonatomic, strong)ZM_UPnPDevice * upnp;
+
 @end
 
 @implementation ZM_DLNAViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //[self.upnp searchDevices];
+}
 
 -(NSMutableArray *)dataArray
 {
@@ -23,27 +31,62 @@
     }
     return _dataArray;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KHEIGHT-100, KWIDTH, 100) style:UITableViewStylePlain];
+    [self setup];
+    //[self.upnp searchDevices];
+}
+-(void)setup
+{
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.0];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KHEIGHT-110, KWIDTH, 110) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor grayColor];
-    [self.view setFrame:CGRectMake(0, KHEIGHT-100, KWIDTH, 100)];
-    self.view.backgroundColor = [UIColor clearColor];
+    //_tableView.backgroundColor = [UIColor grayColor];
+    /*
+    self.upnp = [[ZM_UPnPDevice alloc] init];
+    self.upnp.delegate = self;
+     */
     [self.view addSubview:_tableView];
-    
 }
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"%ld",(long)event.type);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#if 0
+#pragma mark - ZM_UPnPSearchDelegate
+-(void)searchDeviceWithModel:(ZM_UpnpModel *)model
+{
+    NSLog(@"model:%@",model);
+    [self.dataArray addObject:model];
+    [self.tableView reloadData];
+}
+#endif
 #pragma mark - TableViewDelegate
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 30)];
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 30)];
+    titleLabel.text = @"GVS提醒您选择DLNA设备:";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    titleLabel.textColor = [UIColor grayColor];
+    headerView.backgroundColor = [UIColor whiteColor];
+    [headerView addSubview:titleLabel];
+    
+    return headerView;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -51,10 +94,24 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"设备%ld",indexPath.row];
+    ZM_UpnpModel * model = self.dataArray[indexPath.row];
+    cell.textLabel.text = model.friendlyName;
     return cell;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40.0f;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZM_UpnpModel * model = self.dataArray[indexPath.row];
+    self.block(model);
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)upnpModelBlock:(modelBlock)block
+{
+    self.block = block;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

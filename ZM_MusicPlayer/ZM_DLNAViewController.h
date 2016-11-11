@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZM_UpnpModel;
+typedef void (^modelBlock)(ZM_UpnpModel *model);
 @interface ZM_DLNAViewController : UIViewController
-
+@property (nonatomic, strong)NSMutableArray * dataArray;
+@property (nonatomic, strong)modelBlock block;
+-(void)upnpModelBlock:(modelBlock)block;
 @end

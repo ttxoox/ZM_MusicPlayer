@@ -36,6 +36,8 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
+#import "GDataXMLNode.h"
+#import "GCDAsyncUdpSocket.h"
 //#import <Platinum/Platinum.h>
 
 
@@ -52,8 +54,22 @@
 #import "ZM_MusicModel.h"
 #import "ZM_CategoryModel.h"
 #import "ZM_SingerListModel.h"
-
+#import "ZM_UpnpModel.h"
+#import "ZM_UPnPDevice.h"
+#import "ZM_Render.h"
+#import "ZM_UpnpAction.h"
+#import "ZM_GetTransportInfoModel.h"
 #import "ZM_MusicTVCell.h"
 
 #import "ZM_MusicManager.h"
+
+
+
+/****************************test*******************/
+#define SearchStr @"M-SEARCH * HTTP/1.1\r\nHOST: %@:%d\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: %@\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n"
+#define ssdpAddress @"239.255.255.250"
+#define ssdpPort 1900
+static NSString *serviceAVTransport         = @"urn:schemas-upnp-org:service:AVTransport:1";
+static NSString *serviceRenderControl       = @"urn:schemas-upnp-org:service:RenderingControl:1";
+
 #endif /* Header_h */

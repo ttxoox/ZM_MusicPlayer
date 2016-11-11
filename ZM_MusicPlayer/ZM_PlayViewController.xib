@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backImgView" destination="IOH-HF-dIl" id="Jg0-RH-RZh"/>
                 <outlet property="cureenTimeLabel" destination="lW3-yk-WJF" id="SoS-Cr-xkl"/>
+                <outlet property="dlnaBtn" destination="OUX-3k-fUb" id="IFQ-KH-gzs"/>
                 <outlet property="musicName" destination="YNE-KH-cDB" id="aHT-Xj-j1v"/>
                 <outlet property="nextBtn" destination="Z7W-gu-aTq" id="aRI-Wj-c0Y"/>
                 <outlet property="playBtn" destination="H17-WE-sI8" id="aBu-Ef-bKL"/>
@@ -156,7 +157,7 @@
                             <rect key="frame" x="8" y="39" width="46" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="DLNA">
+                            <state key="normal" title="传歌">
                                 <color key="titleColor" red="0.6810385377702588" green="0.52941695254426135" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

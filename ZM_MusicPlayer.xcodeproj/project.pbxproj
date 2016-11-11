@@ -30,6 +30,21 @@
 		EC244F4D1DB9FAED00675C92 /* ZM_MusicTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC244F4C1DB9FAED00675C92 /* ZM_MusicTVCell.m */; };
 		EC244F4F1DBA000900675C92 /* default_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EC244F4E1DBA000900675C92 /* default_icon.png */; };
 		EC69211C1DB9F1BF0010D98D /* ZM_MusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC69211B1DB9F1BF0010D98D /* ZM_MusicModel.m */; };
+		EC801E901DD027E7007994DB /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = EC801E8E1DD027E7007994DB /* GCDAsyncUdpSocket.h */; };
+		EC801E911DD027E7007994DB /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = EC801E8F1DD027E7007994DB /* GCDAsyncUdpSocket.m */; };
+		EC801E941DD027F6007994DB /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = EC801E921DD027F6007994DB /* GDataXMLNode.h */; };
+		EC801E951DD027F6007994DB /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = EC801E931DD027F6007994DB /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EC801E971DD02C0E007994DB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EC801E961DD02C0E007994DB /* libxml2.tbd */; };
+		EC801E9C1DD031AB007994DB /* ZM_UpnpModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC801E9A1DD031AB007994DB /* ZM_UpnpModel.h */; };
+		EC801E9D1DD031AB007994DB /* ZM_UpnpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC801E9B1DD031AB007994DB /* ZM_UpnpModel.m */; };
+		EC801EA01DD0548E007994DB /* ZM_UPnPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = EC801E9E1DD0548E007994DB /* ZM_UPnPDevice.h */; };
+		EC801EA11DD0548E007994DB /* ZM_UPnPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = EC801E9F1DD0548E007994DB /* ZM_UPnPDevice.m */; };
+		EC813D481DD2BD200054FF86 /* ZM_UpnpAction.h in Headers */ = {isa = PBXBuildFile; fileRef = EC813D461DD2BD200054FF86 /* ZM_UpnpAction.h */; };
+		EC813D491DD2BD200054FF86 /* ZM_UpnpAction.m in Sources */ = {isa = PBXBuildFile; fileRef = EC813D471DD2BD200054FF86 /* ZM_UpnpAction.m */; };
+		EC813D4C1DD312780054FF86 /* ZM_GetTransportInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EC813D4A1DD312780054FF86 /* ZM_GetTransportInfoModel.h */; };
+		EC813D4D1DD312780054FF86 /* ZM_GetTransportInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC813D4B1DD312780054FF86 /* ZM_GetTransportInfoModel.m */; };
+		EC87F7231DD1DA0C00502E5A /* ZM_Render.h in Headers */ = {isa = PBXBuildFile; fileRef = EC87F7211DD1DA0C00502E5A /* ZM_Render.h */; };
+		EC87F7241DD1DA0C00502E5A /* ZM_Render.m in Sources */ = {isa = PBXBuildFile; fileRef = EC87F7221DD1DA0C00502E5A /* ZM_Render.m */; };
 		EC8C4AD81DB9C6E000A421AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8C4AD71DB9C6E000A421AC /* main.m */; };
 		EC8C4ADB1DB9C6E000A421AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8C4ADA1DB9C6E000A421AC /* AppDelegate.m */; };
 		EC8C4ADE1DB9C6E000A421AC /* ZM_LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8C4ADD1DB9C6E000A421AC /* ZM_LocalViewController.m */; };
@@ -66,6 +81,8 @@
 		ECA3F8351DBDF2CC001CD03D /* ZM_SingerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8341DBDF2CC001CD03D /* ZM_SingerListModel.m */; };
 		ECA3F8381DBDFD43001CD03D /* ZM_SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */; };
 		ECB8AFFD1DC1B08E00181304 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB8AFFC1DC1B08E00181304 /* playing.png */; };
+		ECEF37B51DD4252E005882C0 /* action.xml in Resources */ = {isa = PBXBuildFile; fileRef = ECEF37B31DD4252E005882C0 /* action.xml */; };
+		ECEF37B61DD4252E005882C0 /* device.xml in Resources */ = {isa = PBXBuildFile; fileRef = ECEF37B41DD4252E005882C0 /* device.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +139,21 @@
 		EC244F4E1DBA000900675C92 /* default_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_icon.png; sourceTree = "<group>"; };
 		EC69211A1DB9F1BF0010D98D /* ZM_MusicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_MusicModel.h; sourceTree = "<group>"; };
 		EC69211B1DB9F1BF0010D98D /* ZM_MusicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_MusicModel.m; sourceTree = "<group>"; };
+		EC801E8E1DD027E7007994DB /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		EC801E8F1DD027E7007994DB /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		EC801E921DD027F6007994DB /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		EC801E931DD027F6007994DB /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		EC801E961DD02C0E007994DB /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		EC801E9A1DD031AB007994DB /* ZM_UpnpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_UpnpModel.h; sourceTree = "<group>"; };
+		EC801E9B1DD031AB007994DB /* ZM_UpnpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_UpnpModel.m; sourceTree = "<group>"; };
+		EC801E9E1DD0548E007994DB /* ZM_UPnPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_UPnPDevice.h; sourceTree = "<group>"; };
+		EC801E9F1DD0548E007994DB /* ZM_UPnPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_UPnPDevice.m; sourceTree = "<group>"; };
+		EC813D461DD2BD200054FF86 /* ZM_UpnpAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_UpnpAction.h; sourceTree = "<group>"; };
+		EC813D471DD2BD200054FF86 /* ZM_UpnpAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_UpnpAction.m; sourceTree = "<group>"; };
+		EC813D4A1DD312780054FF86 /* ZM_GetTransportInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_GetTransportInfoModel.h; sourceTree = "<group>"; };
+		EC813D4B1DD312780054FF86 /* ZM_GetTransportInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_GetTransportInfoModel.m; sourceTree = "<group>"; };
+		EC87F7211DD1DA0C00502E5A /* ZM_Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZM_Render.h; sourceTree = "<group>"; };
+		EC87F7221DD1DA0C00502E5A /* ZM_Render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_Render.m; sourceTree = "<group>"; };
 		EC8C4AD31DB9C6E000A421AC /* ZM_MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZM_MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8C4AD71DB9C6E000A421AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EC8C4AD91DB9C6E000A421AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -177,6 +209,8 @@
 		ECA3F8371DBDFD43001CD03D /* ZM_SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZM_SongViewController.m; sourceTree = "<group>"; };
 		ECB8AFFC1DC1B08E00181304 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		ECD010D31DCACE6B001DF8FC /* Neptune.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Neptune.framework; path = Carthage/Build/iOS/Neptune.framework; sourceTree = "<group>"; };
+		ECEF37B31DD4252E005882C0 /* action.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = action.xml; path = ../../../../action.xml; sourceTree = "<group>"; };
+		ECEF37B41DD4252E005882C0 /* device.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = device.xml; path = ../../../../device.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC801E971DD02C0E007994DB /* libxml2.tbd in Frameworks */,
 				EC108DDE1DCB3AE3006D542A /* Neptune.framework in Frameworks */,
 				EC108DE11DCB3AFA006D542A /* Platinum.framework in Frameworks */,
 				9DF3AB412F119357708D0A2B /* libPods-ZM_MusicPlayer.a in Frameworks */,
@@ -235,10 +270,8 @@
 		EC1797DA1DC09E0F00E4D7E8 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				EC69211A1DB9F1BF0010D98D /* ZM_MusicModel.h */,
-				EC69211B1DB9F1BF0010D98D /* ZM_MusicModel.m */,
-				ECA3F8271DBDAD1E001CD03D /* ZM_MusicManager.h */,
-				ECA3F8281DBDAD1E001CD03D /* ZM_MusicManager.m */,
+				EC801E991DD0317B007994DB /* npnp core */,
+				EC801E981DD0316F007994DB /* 播放model */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -278,6 +311,45 @@
 			children = (
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		EC801E8D1DD027CC007994DB /* 第三方 */ = {
+			isa = PBXGroup;
+			children = (
+				EC801E921DD027F6007994DB /* GDataXMLNode.h */,
+				EC801E931DD027F6007994DB /* GDataXMLNode.m */,
+				EC801E8E1DD027E7007994DB /* GCDAsyncUdpSocket.h */,
+				EC801E8F1DD027E7007994DB /* GCDAsyncUdpSocket.m */,
+			);
+			name = "第三方";
+			sourceTree = "<group>";
+		};
+		EC801E981DD0316F007994DB /* 播放model */ = {
+			isa = PBXGroup;
+			children = (
+				EC69211A1DB9F1BF0010D98D /* ZM_MusicModel.h */,
+				EC69211B1DB9F1BF0010D98D /* ZM_MusicModel.m */,
+				ECA3F8271DBDAD1E001CD03D /* ZM_MusicManager.h */,
+				ECA3F8281DBDAD1E001CD03D /* ZM_MusicManager.m */,
+			);
+			name = "播放model";
+			sourceTree = "<group>";
+		};
+		EC801E991DD0317B007994DB /* npnp core */ = {
+			isa = PBXGroup;
+			children = (
+				EC801E9A1DD031AB007994DB /* ZM_UpnpModel.h */,
+				EC801E9B1DD031AB007994DB /* ZM_UpnpModel.m */,
+				EC813D4A1DD312780054FF86 /* ZM_GetTransportInfoModel.h */,
+				EC813D4B1DD312780054FF86 /* ZM_GetTransportInfoModel.m */,
+				EC801E9E1DD0548E007994DB /* ZM_UPnPDevice.h */,
+				EC801E9F1DD0548E007994DB /* ZM_UPnPDevice.m */,
+				EC87F7211DD1DA0C00502E5A /* ZM_Render.h */,
+				EC87F7221DD1DA0C00502E5A /* ZM_Render.m */,
+				EC813D461DD2BD200054FF86 /* ZM_UpnpAction.h */,
+				EC813D471DD2BD200054FF86 /* ZM_UpnpAction.m */,
+			);
+			name = "npnp core";
 			sourceTree = "<group>";
 		};
 		EC8C4ACA1DB9C6E000A421AC = {
@@ -363,6 +435,7 @@
 		EC8C4B0B1DB9C71900A421AC /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EC801E8D1DD027CC007994DB /* 第三方 */,
 				EC8C4B251DB9EBFF00A421AC /* music */,
 				EC8C4B141DB9C79E00A421AC /* image */,
 				EC8C4B0C1DB9C72C00A421AC /* other */,
@@ -374,6 +447,8 @@
 		EC8C4B0C1DB9C72C00A421AC /* other */ = {
 			isa = PBXGroup;
 			children = (
+				ECEF37B31DD4252E005882C0 /* action.xml */,
+				ECEF37B41DD4252E005882C0 /* device.xml */,
 				EC8C4ADF1DB9C6E000A421AC /* Main.storyboard */,
 				EC8C4AE21DB9C6E000A421AC /* Assets.xcassets */,
 				EC8C4AE41DB9C6E000A421AC /* LaunchScreen.storyboard */,
@@ -498,6 +573,7 @@
 		ED63C4F950D880F5B04D4AC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC801E961DD02C0E007994DB /* libxml2.tbd */,
 				EC108DE01DCB3AF9006D542A /* Platinum.framework */,
 				ECD010D31DCACE6B001DF8FC /* Neptune.framework */,
 				A1861F8AF78BFF8BFB72427E /* libPods-ZM_MusicPlayer.a */,
@@ -512,9 +588,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC801EA01DD0548E007994DB /* ZM_UPnPDevice.h in Headers */,
 				EC01DDF51DCC15BA00ADA47B /* ZM_DLNAViewController.h in Headers */,
+				EC813D4C1DD312780054FF86 /* ZM_GetTransportInfoModel.h in Headers */,
+				EC813D481DD2BD200054FF86 /* ZM_UpnpAction.h in Headers */,
+				EC87F7231DD1DA0C00502E5A /* ZM_Render.h in Headers */,
 				EC108DE41DCB3B7C006D542A /* Platinum.framework in Headers */,
+				EC801E9C1DD031AB007994DB /* ZM_UpnpModel.h in Headers */,
+				EC801E941DD027F6007994DB /* GDataXMLNode.h in Headers */,
 				EC108DE51DCB3B94006D542A /* Neptune.framework in Headers */,
+				EC801E901DD027E7007994DB /* GCDAsyncUdpSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,9 +718,11 @@
 				EC244F4F1DBA000900675C92 /* default_icon.png in Resources */,
 				ECA3F8211DBD9DA8001CD03D /* play@2x.png in Resources */,
 				EC8C4B201DB9E68400A421AC /* local_s.png in Resources */,
+				ECEF37B61DD4252E005882C0 /* device.xml in Resources */,
 				EC8C4B401DB9EC8200A421AC /* test1.mp3 in Resources */,
 				EC244F461DB9F97D00675C92 /* zxy_icon@2x.jpg in Resources */,
 				EC244F451DB9F97D00675C92 /* zxy@2x.jpg in Resources */,
+				ECEF37B51DD4252E005882C0 /* action.xml in Resources */,
 				ECA3F81B1DBD9BE0001CD03D /* default_play_bg.jpg in Resources */,
 				EC244F411DB9F97D00675C92 /* jj@2x.jpg in Resources */,
 				EC8C4B1E1DB9E68400A421AC /* back.png in Resources */,
@@ -751,20 +836,27 @@
 			files = (
 				EC01DDF61DCC15BA00ADA47B /* ZM_DLNAViewController.m in Sources */,
 				EC108DE71DCB3BD2006D542A /* Neptune.framework in Sources */,
+				EC813D4D1DD312780054FF86 /* ZM_GetTransportInfoModel.m in Sources */,
 				EC108DE61DCB3BCD006D542A /* Platinum.framework in Sources */,
 				ECA3F82F1DBDDEEE001CD03D /* ZM_CategoryModel.m in Sources */,
 				ECA3F8291DBDAD1E001CD03D /* ZM_MusicManager.m in Sources */,
 				EC8C4B131DB9C79000A421AC /* ZM_TabBarController.m in Sources */,
+				EC87F7241DD1DA0C00502E5A /* ZM_Render.m in Sources */,
 				EC69211C1DB9F1BF0010D98D /* ZM_MusicModel.m in Sources */,
 				EC1797DE1DC09EAF00E4D7E8 /* ZM_SearchViewController.m in Sources */,
 				EC8C4ADE1DB9C6E000A421AC /* ZM_LocalViewController.m in Sources */,
 				EC8C4ADB1DB9C6E000A421AC /* AppDelegate.m in Sources */,
 				ECA3F8381DBDFD43001CD03D /* ZM_SongViewController.m in Sources */,
+				EC801E911DD027E7007994DB /* GCDAsyncUdpSocket.m in Sources */,
 				ECA3F8181DBD9671001CD03D /* ZM_PlayViewController.mm in Sources */,
 				EC244F4D1DB9FAED00675C92 /* ZM_MusicTVCell.m in Sources */,
 				EC8C4B101DB9C76100A421AC /* ZM_NavigationController.m in Sources */,
+				EC801E9D1DD031AB007994DB /* ZM_UpnpModel.m in Sources */,
+				EC813D491DD2BD200054FF86 /* ZM_UpnpAction.m in Sources */,
 				ECA3F8321DBDE57D001CD03D /* ZM_SingerListViewController.m in Sources */,
+				EC801EA11DD0548E007994DB /* ZM_UPnPDevice.m in Sources */,
 				ECA3F8351DBDF2CC001CD03D /* ZM_SingerListModel.m in Sources */,
+				EC801E951DD027F6007994DB /* GDataXMLNode.m in Sources */,
 				EC8C4AD81DB9C6E000A421AC /* main.m in Sources */,
 				EC8C4B181DB9C92700A421AC /* ZM_NetViewController.m in Sources */,
 			);
@@ -925,6 +1017,15 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = ZM_MusicPlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -946,6 +1047,15 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = ZM_MusicPlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

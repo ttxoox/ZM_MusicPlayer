@@ -8,20 +8,24 @@
 
 #import "ZM_PlayViewController.h"
 #import "Header.h"
-//#include <Platinum/Platinum.h>
-#include <Platinum/PltCtrlPoint.h>
+//#include <Platinum/PltUPnP.h>
+#include <Platinum/Platinum.h>
 #include <Neptune/Neptune.h>
-@interface ZM_PlayViewController ()
+@interface ZM_PlayViewController ()<ZM_UPnPSearchDelegate,ZM_RenderResponseDelegate>
 @property (nonatomic, strong)NSURL * url;
 @property (weak, nonatomic) IBOutlet UIButton *previousBtn;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UILabel *cureenTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *dlnaBtn;
+
 @property (nonatomic, assign)BOOL fileIsExist;
 
-@property (nonatomic, strong)UITableView * tableView;//展示搜索到的UPnP设备
-@property (nonatomic, strong)NSMutableArray * dataArray;//设备数组
+@property (nonatomic, strong)ZM_UPnPDevice * upnpDevice;
+@property (nonatomic, strong)NSMutableArray * dataArray;//Device
+//@property (nonatomic, strong)ZM_UpnpModel * upnpModel;
+@property (nonatomic, strong)ZM_Render * render;
 @end
 static ZM_PlayViewController * playVC;
 
@@ -29,8 +33,9 @@ static ZM_PlayViewController * playVC;
 {
     NSTimer * _timer;
     NSArray * _array;
+    NSInteger vol;//设备反馈的声音
+    
 }
-
 +(ZM_PlayViewController *)sharedPlayVC
 {
     
@@ -51,6 +56,7 @@ static ZM_PlayViewController * playVC;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.dlnaBtn.hidden = YES;
     [_timer setFireDate:[NSDate distantPast]];
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -65,7 +71,6 @@ static ZM_PlayViewController * playVC;
     }
     return _musicArray;
 }
-
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -83,6 +88,7 @@ static ZM_PlayViewController * playVC;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:@"TOPLAYPAGE" object:nil];
     [self setup];
     [self startPlayMusic];
+    [self startSearch];
     
 }
 -(void)setup
@@ -107,7 +113,6 @@ static ZM_PlayViewController * playVC;
     }
     self.playBtn.selected = YES;
     if ([[self.musicArray[_playItem] url] length] == 0) {
-        
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"应版权方要求，该歌曲暂时不能播放，已自动切换到下一首歌曲。" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -123,12 +128,57 @@ static ZM_PlayViewController * playVC;
     }
     
 }
+#pragma mark - 搜索UPnP设备
+//在这个页面搜索，然后传到ZM_DLNAViewController里面，在ZM_DLNAViewController选择后block回调过来进行DLNA连接，目的是分离代码，便于维护。
+//推送歌曲流程：
+//1.搜索设备，[self startSearch]-->[ZM_UPnPDevice searchDevices],然后GCDAsyncUdpSocket发送广播包。搜索是不需要连接的，直接发包进行搜索。搜索到设备后会响应协议代理，返回控制器。[self searchDeviceWithModel:],把设备model存到数组。
+//2.选择回调中的设备，进行控制。[self setDeviceWithModel:];
+//3.控制。
+
+-(void)startSearch
+{
+    self.upnpDevice = [[ZM_UPnPDevice alloc] init];
+    self.upnpDevice.delegate = self;
+    [self.upnpDevice searchDevices];
+}
+-(void)setDeviceWithModel:(ZM_UpnpModel *)model
+{
+    vol = 0;
+    self.render = [[ZM_Render alloc] initWithModel:model];
+    self.render.delegate = self;
+    [self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@",self.url]];
+    [self.render play];
+}
+#pragma mark - ZM_UPnPSearchDelegate
+-(void)searchDeviceWithModel:(ZM_UpnpModel *)model
+{
+    if (model) {
+        self.dlnaBtn.hidden = NO;
+    }
+    if (self.dataArray.count == 0) {
+        [self.dataArray addObject:model];
+    }else{
+        for (int i=0; i<self.dataArray.count; i++) {
+            NSString * name = [self.dataArray[i] friendlyName];
+            if (![model.friendlyName isEqualToString:name]) {
+                [self.dataArray addObject:model];
+            }
+        }
+    }
+}
+-(void)searchDeviceWithError:(NSError *)error
+{
+    NSLog(@"search Device Error:%@",[error description]);
+}
+
+#pragma mark - xib方法
 -(void)startPlayMusic
 {
     _timer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(sliderHandle:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     [[ZM_MusicManager shareMusicManager] playMusicWithURL:self.url andIndex:_playItem];
 }
+
 - (IBAction)quitBtnHandle:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -180,6 +230,16 @@ static ZM_PlayViewController * playVC;
         [[ZM_MusicManager shareMusicManager] downloadMusicWithUrl:[NSString stringWithFormat:@"%@",self.url] andFileName:[self.musicArray[_playItem] title]];
     }
 }
+- (IBAction)dlnaHanle:(UIButton *)sender {
+    ZM_DLNAViewController * dlna = [[ZM_DLNAViewController alloc] init];
+    [dlna upnpModelBlock:^(ZM_UpnpModel *model) {
+        [self setDeviceWithModel:model];
+    }];
+    self.definesPresentationContext = YES;
+    dlna.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [dlna.dataArray addObjectsFromArray:self.dataArray];
+    [self presentViewController:dlna animated:YES completion:nil];
+}
 -(BOOL)checkFileExist
 {
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -205,59 +265,67 @@ static ZM_PlayViewController * playVC;
     return self.fileIsExist;
 }
 
-- (IBAction)dlnaHanle:(UIButton *)sender {
-/*
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 500, KWIDTH, 75) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor whiteColor];
-    [self.view bringSubviewToFront:self.tableView];
-    [self.view addSubview:_tableView];
- */
-#if 0
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择设备" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"设备1" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"设备2" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertController addAction:action1];
-    [alertController addAction:action2];
-    [alertController addAction:action3];
-    [self presentViewController:alertController animated:YES completion:nil];
-#endif
 
-    ZM_DLNAViewController * dlna = [[ZM_DLNAViewController alloc] init];
-    [self presentViewController:dlna animated:YES completion:nil];
-}
-
-#if 0
-#pragma mark - UPnP TableView delegate
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 5;
-    //return self.dataArray.count;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = @"test";
-    cell.textLabel.textColor = [UIColor blackColor];
-    return cell;
-}
-#endif
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - ZM_RenderResponseDelegate
+-(void)setAVTransportURIResponse
+{
+    NSLog(@"播放uri设置响应成功");
+}
+-(void)getAVTransportURIResponse:(ZM_GetTransportInfoModel *)info
+{
+    NSLog(@"已捕获播放uri响应");
+    NSLog(@"currentSpeed:%@",info.currentSpeed);
+    NSLog(@"currentTransportState:%@",info.currentTransportState);
+    NSLog(@"currentTransportStatus:%@",info.currentTransportStatus);
+    /*
+    if (!([info.currentTransportState isEqualToString:@"PLAYING"] || [info.currentTransportState isEqualToString:@"TRANSITIONING"])) {
+        [self.render play];
+    }
+     */
+    [self playBtnHandle:self.playBtn];
+    if (![info.currentTransportState isEqualToString:@"TRANSITIONNING"]) {
+        [self.render play];
+    }
+    //[self.render play];
+    
+}
+-(void)playActionResponse
+{
+    NSLog(@"播放动作响应");
+}
+-(void)pauseActionResponse
+{
+    NSLog(@"暂停动作响应");
+}
+-(void)stopActionResponse
+{
+    NSLog(@"停止动作响应");
+}
+-(void)nextActionResponse
+{
+    NSLog(@"下一首动作响应");
+}
+-(void)previousActionResponse
+{
+    NSLog(@"上一首动作响应");
+}
+-(void)setVolumeResponse
+{
+    NSLog(@"设置声音动作响应");
+}
+-(void)getVolumeResponseWithVolume:(NSString *)volume
+{
+    NSLog(@"获取声音动作响应");
+    NSLog(@"%@",volume);
+}
+-(void)undefineActionResponse:(NSString *)xmlString
+{
+    NSLog(@"未定义的动作:%@",xmlString);
+}
 /*
 #pragma mark - Navigation
 
