@@ -148,14 +148,11 @@ static ZM_PlayViewController * playVC;
     self.render = [[ZM_Render alloc] initWithModel:model];
     self.render.delegate = self;
     [self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@",self.url]];
-    //[self.render setAVTransportWithURL:@"http://sc1.111ttt.com/2016/1/11/14/204142307072.mp3"];
     //http://sc1.111ttt.com/2016/1/11/14/204142307072.mp3
     //http://up.haoduoge.com:82/mp3/2016-07-22/1469188914.mp3
-    [self.render setNextAVTransportWithNextURL:self.nextURLStr];
+    //[self.render setNextAVTransportWithNextURL:self.nextURLStr];
     [self.render play];
 }
-//http://tyst.migu.cn/public/ringmaker01/n16/2016/10/2014年12月26日紧急准入纵横世代10首/全曲试听/Mp3_128_44_16/天涯过客-周杰伦.mp3?channelid=03&k=d33a28c679acd5c2&t=1479201093
-//http://tyst.migu.cn/public/600907/tone/2014/12/16/2014121618/update/算什么男人-周杰伦/999989/算什么男人-周杰伦.mp3?channelid=03&k=5ea2f5b4b6549760&t=1479201213
 #pragma mark - ZM_UPnPSearchDelegate
 -(void)searchDeviceWithModel:(ZM_UpnpModel *)model
 {
@@ -199,7 +196,7 @@ static ZM_PlayViewController * playVC;
     if (self.render == nil) {
         [[ZM_MusicManager shareMusicManager] previousMusic];
     }else{
-        [self.render previous];
+        [self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@",self.url]];
     }
     
     
@@ -233,12 +230,7 @@ static ZM_PlayViewController * playVC;
     if (self.render == nil) {
         [[ZM_MusicManager shareMusicManager] nextMusic];
     }else{
-        
-        self.nextURLStr = [NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem] url]];
-        //[self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem] url]]];
-        [self.render setNextAVTransportWithNextURL:self.nextURLStr];
-        [self.render next];
-        
+        [self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@",self.url]];
     }
 }
 - (IBAction)sliderHandle:(UISlider *)sender {
@@ -327,18 +319,16 @@ static ZM_PlayViewController * playVC;
     if (![info.currentTransportState isEqualToString:@"TRANSITIONNING"]) {
         [self.render play];
         [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
-        [[[ZM_MusicManager shareMusicManager] audioPlayer] pause];
+        [[ZM_MusicManager shareMusicManager].audioPlayer pause];
     }
 }
 -(void)playActionResponse
 {
     NSLog(@"播放动作响应");
-    //[self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
 }
 -(void)pauseActionResponse
 {
     NSLog(@"暂停动作响应");
-    //[self.playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
 }
 -(void)stopActionResponse
 {
@@ -365,6 +355,19 @@ static ZM_PlayViewController * playVC;
 -(void)undefineActionResponse:(NSString *)xmlString
 {
     NSLog(@"未定义的动作:%@",xmlString);
+    /*
+     <SOAP-ENV:Fault>
+        <faultcode>SOAP-ENV:Client</faultcode>
+        <faultstring>UPnPError</faultstring>
+        <detail>
+            <u:UPnPError xmlns:u="urn:schemas-upnp-org:control-1-0">
+            <u:errorCode>701</u:errorCode>
+            <u:errorDescription>Transition not available</u:errorDescription>
+            </u:UPnPError>
+        </detail>
+     </SOAP-ENV:Fault>
+     */
+    
 }
 /*
 #pragma mark - Navigation

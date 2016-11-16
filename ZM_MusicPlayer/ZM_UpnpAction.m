@@ -63,7 +63,6 @@
     [self.xmlElement addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:[self getServiceType]]];
     [command addChild:self.xmlElement];
     [xmlEle addChild:command];
-    NSLog(@"%@",xmlEle.XMLString);
     return xmlEle.XMLString;
 }
 -(NSString *)getPostUrlStrWith:(ZM_UpnpModel *)model

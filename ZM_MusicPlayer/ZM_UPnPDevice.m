@@ -36,14 +36,12 @@
 #pragma mark - GCDAsyncUdpSocketDelegate
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didConnectToAddress:(NSData *)address
 {
-    NSLog(@"1");
     NSLog(@"%@",[[NSString alloc] initWithData:address encoding:NSUTF8StringEncoding]);
     NSLog(@"%s",__func__);
     
 }
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotConnect:(NSError * _Nullable)error
 {
-    NSLog(@"2");
     NSLog(@"%s",__func__);
     [self searchDevices];
     NSLog(@"%@",[error description]);
@@ -51,12 +49,10 @@
 }
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag
 {
-    NSLog(@"3");
     NSLog(@"%s",__func__);
 }
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError * _Nullable)error
 {
-    NSLog(@"4");
     NSLog(@"%s",__func__);
     NSLog(@"%@",[error description]);
     
@@ -65,8 +61,6 @@
       fromAddress:(NSData *)address
 withFilterContext:(nullable id)filterContext
 {
-    NSLog(@"5");
-    //NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSURL * location = [self getURLforDeviceWithData:data];
     if (location) {
         [self getInfoWithDeviceLocaltion:location];
@@ -133,7 +127,6 @@ withFilterContext:(nullable id)filterContext
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError  * _Nullable)error
 {
-    NSLog(@"6");
     NSLog(@"%s",__func__);
     NSLog(@"%@",[error description]);
     

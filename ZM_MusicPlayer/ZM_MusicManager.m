@@ -47,7 +47,7 @@ static AVAudioSession * session;
  */
 -(void)playMusicWithURL:(NSURL *)playURL andIndex:(NSInteger)index
 {
-    //NSData * musicData = [[NSData alloc] init];
+    [self.audioPlayer stop];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData * data = [NSData dataWithContentsOfURL:playURL];
         dispatch_async(dispatch_get_main_queue(), ^{

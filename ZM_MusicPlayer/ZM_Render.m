@@ -20,7 +20,7 @@
 #pragma mark - AVTransportAction
 -(void)setAVTransportWithURL:(NSString *)urlStr
 {
-    NSLog(@"urlStr:%@",urlStr);
+    NSLog(@"CurrentURL:%@",urlStr);
     //设置动作及参数,具体有多少个参数，需要在XML文件里面看<argumentList>节点下有多少个子节点
     //动作名称:SetAVTransportURI,为特定值，在XML文件里可以体现
     //动作参数1:InstanceID,设置当前播放时期时为 0 即可
@@ -126,7 +126,6 @@
     NSArray * array = [rootElement children];
     for (int i=0; i<array.count; i++) {
         GDataXMLElement * bodyElement = array[i];
-        NSLog(@"bodyElement:%@",bodyElement.XMLString);
         NSArray * bodyArray = [bodyElement children];
         if ([[bodyElement name] hasSuffix:@"Body"]) {
             [self respondsMethod:bodyArray];
