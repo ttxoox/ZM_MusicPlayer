@@ -48,7 +48,6 @@
     //这里是拼接动作action，前面是服务，后面是动作，中间用#连接
     //urn:schemas-upnp-org:service:AVTransport:1#Play
     if (_serviceType == ZMAVTransportService) {
-        NSLog(@"_serviceType:%@",[NSString stringWithFormat:@"\"%@#%@\"",serviceAVTransport,self.name]);
         return [NSString stringWithFormat:@"\"%@#%@\"",serviceAVTransport,self.name];
     }else{
         return [NSString stringWithFormat:@"\"%@#%@\"",serviceRenderControl,self.name];
@@ -64,6 +63,7 @@
     [self.xmlElement addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:[self getServiceType]]];
     [command addChild:self.xmlElement];
     [xmlEle addChild:command];
+    NSLog(@"%@",xmlEle.XMLString);
     return xmlEle.XMLString;
 }
 -(NSString *)getPostUrlStrWith:(ZM_UpnpModel *)model

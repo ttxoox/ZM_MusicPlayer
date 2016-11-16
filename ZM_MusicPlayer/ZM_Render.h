@@ -11,6 +11,7 @@
 @protocol ZM_RenderResponseDelegate <NSObject>
 @optional
 -(void)setAVTransportURIResponse;
+-(void)setNextTransportURIResponse;
 -(void)getAVTransportURIResponse:(ZM_GetTransportInfoModel *)info;
 -(void)playActionResponse;
 -(void)pauseActionResponse;
@@ -36,6 +37,12 @@
  */
 -(void)setAVTransportWithURL:(NSString *)urlStr;
 
+/**
+ 设置下一个投屏链接
+
+ @param urlStr 链接地址
+ */
+-(void)setNextAVTransportWithNextURL:(NSString *)urlStr;
 /**
  播放
  */

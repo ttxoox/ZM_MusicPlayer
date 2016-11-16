@@ -8,11 +8,10 @@
 
 #import "ZM_PlayViewController.h"
 #import "Header.h"
-//#include <Platinum/PltUPnP.h>
-#include <Platinum/Platinum.h>
-#include <Neptune/Neptune.h>
+#import <MediaPlayer/MediaPlayer.h>
 @interface ZM_PlayViewController ()<ZM_UPnPSearchDelegate,ZM_RenderResponseDelegate>
 @property (nonatomic, strong)NSURL * url;
+@property (nonatomic, copy)NSString * nextURLStr;
 @property (weak, nonatomic) IBOutlet UIButton *previousBtn;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
@@ -36,20 +35,10 @@ static ZM_PlayViewController * playVC;
     NSInteger vol;//设备反馈的声音
     
 }
-+(ZM_PlayViewController *)sharedPlayVC
-{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        playVC = [[ZM_PlayViewController alloc] init];
-    });
-    return playVC;
-    
-}
 -(NSMutableArray *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [[NSMutableArray alloc] init];
+        _dataArray = [[NSMutableArray alloc] initWithObjects:[[UIDevice currentDevice] name], nil];
     }
     return _dataArray;
 }
@@ -84,15 +73,26 @@ static ZM_PlayViewController * playVC;
     //接收通知，该通知由ZM_MusicManager发送,当前歌曲播放完毕，进行下一首播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nextBtnHandle:) name:@"PLAYEND" object:nil];
     
-    //接收通知，该通知由ZM_NavigationController发送，更改当前页面的参数
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setup) name:@"TOPLAYPAGE" object:nil];
+    //监听系统音量的变化，通知名不可改
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSystemVolume:) name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
     [self setup];
     [self startPlayMusic];
     [self startSearch];
     
+    
+}
+-(void)setSystemVolume:(NSNotification *)notification
+{
+    float systemVolume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+    if (self.render != nil) {
+        [self.render setVolumeWithString:[NSString stringWithFormat:@"%d",(int)(systemVolume*100)]];
+    }
 }
 -(void)setup
 {
+    //NSLog(@"%@",[[UIDevice currentDevice] name]);
     self.musicName.text = [NSString stringWithFormat:@"%@-%@专辑",[self.musicArray[_playItem] title],[self.musicArray[_playItem] album]];
     self.singerName.text = [self.musicArray[_playItem] singer];
     _array = [[self.musicArray[_playItem] singerImg] componentsSeparatedByString:@":"];
@@ -108,6 +108,7 @@ static ZM_PlayViewController * playVC;
         //网络音乐源
         NSString * urlStr = [NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem] url]];
         self.url = [NSURL URLWithString:urlStr];
+        self.nextURLStr = [NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem+1] url]];
     }else{
         self.url = [[NSBundle mainBundle] URLForResource:[self.musicArray[_playItem] url] withExtension:nil];
     }
@@ -147,18 +148,24 @@ static ZM_PlayViewController * playVC;
     self.render = [[ZM_Render alloc] initWithModel:model];
     self.render.delegate = self;
     [self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@",self.url]];
+    //[self.render setAVTransportWithURL:@"http://sc1.111ttt.com/2016/1/11/14/204142307072.mp3"];
+    //http://sc1.111ttt.com/2016/1/11/14/204142307072.mp3
+    //http://up.haoduoge.com:82/mp3/2016-07-22/1469188914.mp3
+    [self.render setNextAVTransportWithNextURL:self.nextURLStr];
     [self.render play];
 }
+//http://tyst.migu.cn/public/ringmaker01/n16/2016/10/2014年12月26日紧急准入纵横世代10首/全曲试听/Mp3_128_44_16/天涯过客-周杰伦.mp3?channelid=03&k=d33a28c679acd5c2&t=1479201093
+//http://tyst.migu.cn/public/600907/tone/2014/12/16/2014121618/update/算什么男人-周杰伦/999989/算什么男人-周杰伦.mp3?channelid=03&k=5ea2f5b4b6549760&t=1479201213
 #pragma mark - ZM_UPnPSearchDelegate
 -(void)searchDeviceWithModel:(ZM_UpnpModel *)model
 {
     if (model) {
         self.dlnaBtn.hidden = NO;
     }
-    if (self.dataArray.count == 0) {
+    if (self.dataArray.count == 1) {
         [self.dataArray addObject:model];
     }else{
-        for (int i=0; i<self.dataArray.count; i++) {
+        for (int i=1; i<self.dataArray.count; i++) {
             NSString * name = [self.dataArray[i] friendlyName];
             if (![model.friendlyName isEqualToString:name]) {
                 [self.dataArray addObject:model];
@@ -189,16 +196,31 @@ static ZM_PlayViewController * playVC;
         self.playItem = self.musicArray.count - 1;
     }
     [self setup];
-    [[ZM_MusicManager shareMusicManager] previousMusic];
+    if (self.render == nil) {
+        [[ZM_MusicManager shareMusicManager] previousMusic];
+    }else{
+        [self.render previous];
+    }
+    
+    
 }
 - (IBAction)playBtnHandle:(UIButton *)sender {
     self.playBtn.selected = !self.playBtn.isSelected;
-    if (self.playBtn.isSelected) {
-        [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    if (self.render == nil) {
+        if (self.playBtn.isSelected) {
+            [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        }else{
+            [self.playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        }
         [[ZM_MusicManager shareMusicManager] pausePlayMusic];
     }else{
-        [self.playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-        [[ZM_MusicManager shareMusicManager] pausePlayMusic];
+        if (self.playBtn.isSelected) {
+            [self.render play];
+            [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        }else{
+            [self.render pause];
+            [self.playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        }
     }
 }
 - (IBAction)nextBtnHandle:(UIButton *)sender {
@@ -208,7 +230,16 @@ static ZM_PlayViewController * playVC;
         self.playItem = 0;
     }
     [self setup];
-    [[ZM_MusicManager shareMusicManager] nextMusic];
+    if (self.render == nil) {
+        [[ZM_MusicManager shareMusicManager] nextMusic];
+    }else{
+        
+        self.nextURLStr = [NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem] url]];
+        //[self.render setAVTransportWithURL:[NSString stringWithFormat:@"%@&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1",[self.musicArray[_playItem] url]]];
+        [self.render setNextAVTransportWithNextURL:self.nextURLStr];
+        [self.render next];
+        
+    }
 }
 - (IBAction)sliderHandle:(UISlider *)sender {
     CGFloat currentTime = [[ZM_MusicManager shareMusicManager] getCurrentTime];
@@ -235,9 +266,16 @@ static ZM_PlayViewController * playVC;
     [dlna upnpModelBlock:^(ZM_UpnpModel *model) {
         [self setDeviceWithModel:model];
     }];
+    [dlna musicBlockHandle:^() {
+        [self.render stop];
+        self.render = nil;
+        [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        [[ZM_MusicManager shareMusicManager] playMusicWithURL:self.url andIndex:_playItem];
+    }];
     self.definesPresentationContext = YES;
     dlna.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [dlna.dataArray addObjectsFromArray:self.dataArray];
+    dlna.render = self.render;
     [self presentViewController:dlna animated:YES completion:nil];
 }
 -(BOOL)checkFileExist
@@ -275,31 +313,32 @@ static ZM_PlayViewController * playVC;
 {
     NSLog(@"播放uri设置响应成功");
 }
+-(void)setNextTransportURIResponse
+{
+    NSLog(@"设置下一首响应成功");
+    [self.render play];
+}
 -(void)getAVTransportURIResponse:(ZM_GetTransportInfoModel *)info
 {
     NSLog(@"已捕获播放uri响应");
     NSLog(@"currentSpeed:%@",info.currentSpeed);
     NSLog(@"currentTransportState:%@",info.currentTransportState);
     NSLog(@"currentTransportStatus:%@",info.currentTransportStatus);
-    /*
-    if (!([info.currentTransportState isEqualToString:@"PLAYING"] || [info.currentTransportState isEqualToString:@"TRANSITIONING"])) {
-        [self.render play];
-    }
-     */
-    [self playBtnHandle:self.playBtn];
     if (![info.currentTransportState isEqualToString:@"TRANSITIONNING"]) {
         [self.render play];
+        [self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        [[[ZM_MusicManager shareMusicManager] audioPlayer] pause];
     }
-    //[self.render play];
-    
 }
 -(void)playActionResponse
 {
     NSLog(@"播放动作响应");
+    //[self.playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
 }
 -(void)pauseActionResponse
 {
     NSLog(@"暂停动作响应");
+    //[self.playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
 }
 -(void)stopActionResponse
 {
@@ -321,6 +360,7 @@ static ZM_PlayViewController * playVC;
 {
     NSLog(@"获取声音动作响应");
     NSLog(@"%@",volume);
+    
 }
 -(void)undefineActionResponse:(NSString *)xmlString
 {

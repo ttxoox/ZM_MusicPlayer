@@ -80,4 +80,6 @@
 
 //下载歌曲
 -(void)downloadMusicWithUrl:(NSString *)url andFileName:(NSString *)filename;
+
+
 @end

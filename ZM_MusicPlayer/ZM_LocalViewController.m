@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self setup];
     self.title = @"本地音乐";
+    
 }
 //懒加载，第三方库完成字典转模型
 -(NSMutableArray *)dataArray

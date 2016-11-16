@@ -9,6 +9,7 @@
 #import "ZM_DLNAViewController.h"
 #import "Header.h"
 @interface ZM_DLNAViewController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (nonatomic, strong)UITableView * tableView;
 
 
@@ -37,7 +38,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setup];
-    //[self.upnp searchDevices];
 }
 -(void)setup
 {
@@ -45,11 +45,6 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KHEIGHT-110, KWIDTH, 110) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    //_tableView.backgroundColor = [UIColor grayColor];
-    /*
-    self.upnp = [[ZM_UPnPDevice alloc] init];
-    self.upnp.delegate = self;
-     */
     [self.view addSubview:_tableView];
 }
 
@@ -57,15 +52,6 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-#if 0
-#pragma mark - ZM_UPnPSearchDelegate
--(void)searchDeviceWithModel:(ZM_UpnpModel *)model
-{
-    NSLog(@"model:%@",model);
-    [self.dataArray addObject:model];
-    [self.tableView reloadData];
-}
-#endif
 #pragma mark - TableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -94,8 +80,13 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    ZM_UpnpModel * model = self.dataArray[indexPath.row];
-    cell.textLabel.text = model.friendlyName;
+    if (indexPath.row == 0) {
+        cell.textLabel.text = self.dataArray[indexPath.row];
+    }else{
+        ZM_UpnpModel * model = self.dataArray[indexPath.row];
+        cell.textLabel.text = model.friendlyName;
+    }
+    
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,13 +95,22 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ZM_UpnpModel * model = self.dataArray[indexPath.row];
-    self.block(model);
+    if (indexPath.row != 0) {
+        ZM_UpnpModel * model = self.dataArray[indexPath.row];
+        self.modelblock(model);
+    }else{
+        
+        self.musicblock();
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)upnpModelBlock:(modelBlock)block
 {
-    self.block = block;
+    self.modelblock = block;
+}
+-(void)musicBlockHandle:(musicBlock)block
+{
+    self.musicblock = block;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

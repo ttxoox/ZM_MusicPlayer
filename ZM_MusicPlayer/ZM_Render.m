@@ -32,6 +32,15 @@
     [action setArgumentValue:@"" forName:@"CurrentURIMetaData"];
     [self postRequestWithAction:action];
 }
+-(void)setNextAVTransportWithNextURL:(NSString *)urlStr
+{
+    NSLog(@"nextUrlStr:%@",urlStr);
+    ZM_UpnpAction * action = [[ZM_UpnpAction alloc] initWithAction:@"SetNextAVTransportURI"];
+    [action setArgumentValue:@"0" forName:@"InstanceID"];
+    [action setArgumentValue:urlStr forName:@"NextURI"];
+    [action setArgumentValue:@"" forName:@"NextURIMetaData"];
+    [self postRequestWithAction:action];
+}
 -(void)getTransportInfo{
     ZM_UpnpAction *action = [[ZM_UpnpAction alloc] initWithAction:@"GetTransportInfo"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
@@ -117,7 +126,7 @@
     NSArray * array = [rootElement children];
     for (int i=0; i<array.count; i++) {
         GDataXMLElement * bodyElement = array[i];
-        //NSLog(@"bodyElement:%@",bodyElement.XMLString);
+        NSLog(@"bodyElement:%@",bodyElement.XMLString);
         NSArray * bodyArray = [bodyElement children];
         if ([[bodyElement name] hasSuffix:@"Body"]) {
             [self respondsMethod:bodyArray];
@@ -126,6 +135,11 @@
         }
     }
 }
+/*
+ 能够搜索到设备，推送音乐后能收到反馈信息，但是播放不成功。
+ 在windows系统电脑上可以播放，命令都没问题。
+ 设备解析url是怎么解析的？
+ */
 -(void)respondsMethod:(NSArray *)array
 {
     for (int i=0; i<array.count; i++) {
@@ -149,6 +163,8 @@
             [self getVolumeSuccessWithInfo:element];
         }else if([[element name] hasSuffix:@"GetTransportInfoResponse"]){
             [self getTransportInfoResponseWithInfo:element];
+        }else if ([[element name] hasSuffix:@"SetNextAVTransportURIResponse"]){
+            [self upnpSetNextAVTransportResponse];
         }else{
             [self upnpUndefineWithErrorString:element.XMLString];
         }
@@ -159,6 +175,12 @@
 {
     if ([self.delegate respondsToSelector:@selector(setAVTransportURIResponse)]) {
         [self.delegate setAVTransportURIResponse];
+    }
+}
+-(void)upnpSetNextAVTransportResponse
+{
+    if ([self.delegate respondsToSelector:@selector(setNextTransportURIResponse)]) {
+        [self.delegate setNextTransportURIResponse];
     }
 }
 -(void)upnpPlayResponse
