@@ -256,6 +256,7 @@ static ZM_PlayViewController * playVC;
 - (IBAction)dlnaHanle:(UIButton *)sender {
     ZM_DLNAViewController * dlna = [[ZM_DLNAViewController alloc] init];
     [dlna upnpModelBlock:^(ZM_UpnpModel *model) {
+        [[ZM_MusicManager shareMusicManager] pausePlayMusic];
         [self setDeviceWithModel:model];
     }];
     [dlna musicBlockHandle:^() {
